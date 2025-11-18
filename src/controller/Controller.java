@@ -1,24 +1,28 @@
+package controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import view.View;
+import games.Game;
+import games.NoAI;
+import model.Model;
+
 public class Controller extends MouseAdapter { 
 
-    private final View view; 
+    private final view.View view;
     private final Model model;
-    private final Gametype gt; 
+    private final Game gameType;
 
     public Controller(View view, Model model){ 
         this.view = view;
         this.model = model;
+        this.gameType = new NoAI();
     }
 
     @Override
     public void mouseClicked(MouseEvent e){ 
-        // System.out.println(e.getComponent().getName()); // Spot is already taken | make view shake?        
-        int pos = Integer.parseInt(e.getComponent().getName());
-        model.applyMove(pos);    
-        view.render(model);
+        gameType.execute(e, model, view);
     }
 
 }

@@ -1,3 +1,5 @@
+package model;
+
 
 public class Model { 
     
@@ -24,11 +26,6 @@ public class Model {
 
     private boolean isFull(){ 
         return (getBoard() == 0b111111111);
-
-    }
-
-    private Status getStatus(){ 
-        
 
     }
 

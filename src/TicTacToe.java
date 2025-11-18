@@ -1,3 +1,9 @@
+
+import controller.Controller;
+import model.Model;
+import view.View;
+
+
 public class TicTacToe { 
 
     public static void main(String[] args){ 

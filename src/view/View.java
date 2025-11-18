@@ -1,12 +1,11 @@
+package view;
 
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import model.Model;
 
 public class View { 
     
@@ -42,8 +41,7 @@ public class View {
     }
 
 
-    public void render(Model model){ 
-    
+    public void render(Model model){
         String board = model.toString();
         for (int i = 0; i < buttons.length; i++) {
             if (board.charAt(i) == '_') continue;
@@ -52,12 +50,12 @@ public class View {
 
     }
 
-
     public void setListener(MouseAdapter m){ 
         for (JButton b : buttons){ 
             b.addMouseListener(m);
         }
 
     }
+
 
 }
