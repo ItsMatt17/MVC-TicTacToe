@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import model.Model;
+import utils.Utils;
 import view.View;
 
 import javax.swing.*;
 
 
-public class NoAI implements Game {
+public class NoAI extends Game {
 
 
     public NoAI(){}
+
     
     @Override
     public void execute(MouseEvent e, Model model, View view){
@@ -23,29 +25,7 @@ public class NoAI implements Game {
         model.move(pos);
         view.render(model.toString());
 
-        if (model.isWon()) {
-            model.setWinningPos();
-            System.out.println(model.getWinningPos());
-            view.gameWon(model.getWinningPos());
-            Timer t = new Timer(3500, e1 -> {
-                model.reset();
-                view.reset();
-            });
-            t.setRepeats(false);
-            t.start();
-            return;
-        }
-
-        if (model.isFull()) {
-            view.gameDraw(new ArrayList<Integer>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8)));
-            Timer t = new Timer(3500, e1 -> {
-                model.reset();
-                view.reset();
-            });
-            t.setRepeats(false);
-            t.start();
-        }
-
+        renderEndstate(model, view);
 
     }
 

@@ -36,10 +36,10 @@ public class Model {
 
     public void setTurn(int turn){ this.turn = turn; }
 
-    public int minimax(int depth){
+    public int minimax(int depth, int maxDepth){
         Player curr = players[turn];
-        if (curr.isWin()) return curr.isMaximizing() ? 10 - depth : depth - 10;
-        if(isFull() || depth == 0) return 0;
+        if (curr.isWin()) return curr.isMaximizing() ? 10 - depth : -10 + depth;
+        if(isFull() || depth == maxDepth) return 0;
 
         if (curr.isMaximizing()) {
             int max = Integer.MIN_VALUE;
@@ -49,7 +49,7 @@ public class Model {
                 int oldTurn = turn;
 
                 move(i);
-                int score = minimax(depth-1);
+                int score = minimax(++depth, maxDepth);
                 max = Math.max(score, max);
 
                 curr.setBoard(oldBoard);
@@ -64,8 +64,7 @@ public class Model {
                 int oldTurn = turn;
 
                 move(i);
-
-                int score = minimax(depth-1);
+                int score = minimax(++depth, maxDepth);
                 min = Math.min(score, min);
 
                 curr.setBoard(oldBoard);
@@ -80,6 +79,7 @@ public class Model {
         Player p = players[turn];
         int bestScore = p.isMaximizing() ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         int bestIdx = -1;
+
         for(int i = 0; i < 9; i++) {
             if (!isOpen(i)) continue;
 
@@ -87,7 +87,8 @@ public class Model {
             int oldTurn = turn;
 
             move(i);
-            int val = minimax(9);
+
+            int val = minimax(0, 9);
 
             p.setBoard(oldBoard);
             setTurn(oldTurn);

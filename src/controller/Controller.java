@@ -16,10 +16,10 @@ public class Controller extends MouseAdapter {
     private final Model model;
     private final Game gameType;
 
-    public Controller(View view, Model model){ 
+    public Controller(View view, Model model, Game gameType){
         this.view = view;
         this.model = model;
-        this.gameType = new AI();
+        this.gameType = gameType;
     }
 
 
