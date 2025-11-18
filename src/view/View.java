@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import model.Model;
-import model.Status;
 
 public class View { 
     
