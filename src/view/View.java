@@ -1,11 +1,13 @@
 package view;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import model.Model;
+import model.Status;
 
 public class View { 
     
@@ -41,8 +43,14 @@ public class View {
     }
 
 
-    public void render(Model model){
-        String board = model.toString();
+    public void gameWon(ArrayList<Integer> pos){
+        System.out.println(pos);
+        for (int i : pos) {
+            buttons[i].setBackground(Color.GREEN);
+        }
+    }
+
+    public void render(String board){
         for (int i = 0; i < buttons.length; i++) {
             if (board.charAt(i) == '_') continue;
             buttons[i].setText(String.valueOf(board.charAt(i)));

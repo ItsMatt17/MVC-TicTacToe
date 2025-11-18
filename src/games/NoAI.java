@@ -12,11 +12,11 @@ public class NoAI implements Game {
     public NoAI(){}
     
     @Override
-    public void execute(MouseEvent e, Model model, View view){ 
-        int pos = Integer.parseInt(e.getComponent().getName());
-        model.applyMove(pos);    
-        view.render(model);
+    public void execute(MouseEvent e, Model model, View view){
+//     w
     }
+
+
     
 
     

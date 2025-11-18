@@ -14,6 +14,8 @@ public class Controller extends MouseAdapter {
     private final Model model;
     private final Game gameType;
 
+
+
     public Controller(View view, Model model){ 
         this.view = view;
         this.model = model;
@@ -21,8 +23,20 @@ public class Controller extends MouseAdapter {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e){ 
-        gameType.execute(e, model, view);
+    public void mouseClicked(MouseEvent e){
+        int pos = Integer.parseInt(e.getComponent().getName());
+        model.move(pos);
+        view.render(model.toString());
+
+        if (model.isWon()) {
+            view.gameWon(model.getWinningPos());
+
+        }
+//        else if (model.isFull()) view.gameDraw();
+
+
+
+
     }
 
 }
