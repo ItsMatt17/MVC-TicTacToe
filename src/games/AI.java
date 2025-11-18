@@ -1,31 +1,37 @@
 package games;
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import model.Model;
 import view.View;
 
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+public class AI implements Game {
 
-public class NoAI implements Game {
+    public AI(){}
 
-
-    public NoAI(){}
-    
     @Override
-    public void execute(MouseEvent e, Model model, View view){
-        if(model.isWon() || model.isFull()) return;
+    public void execute(MouseEvent e, Model model, View view) {
+        if (model.isWon() || model.isFull()) return;
 
         int pos = Integer.parseInt(e.getComponent().getName());
+        if (!model.isOpen(pos)) return;
+
+
         model.move(pos);
         view.render(model.toString());
+        System.out.println(pos);
+
+
+        if(!model.isWon() && !model.isFull()){
+            model.move(model.getBestMove());
+            view.render(model.toString());
+        }
 
         if (model.isWon()) {
             model.setWinningPos();
-            System.out.println(model.getWinningPos());
             view.gameWon(model.getWinningPos());
             Timer t = new Timer(3500, e1 -> {
                 model.reset();
@@ -44,13 +50,11 @@ public class NoAI implements Game {
             });
             t.setRepeats(false);
             t.start();
+            return;
         }
+
+        // ===== AI MOVE =====
 
 
     }
-
-
-    
-
-    
 }

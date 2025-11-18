@@ -1,13 +1,11 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import games.AI;
 import view.View;
 import games.Game;
-import games.NoAI;
 import model.Model;
 
 import javax.swing.*;
@@ -21,44 +19,13 @@ public class Controller extends MouseAdapter {
     public Controller(View view, Model model){ 
         this.view = view;
         this.model = model;
-        this.gameType = new NoAI();
+        this.gameType = new AI();
     }
 
 
     @Override
-    public void mouseClicked(MouseEvent e){
-        System.out.println(model.isWon());
-        if(model.isWon() || model.isFull()) return;
-
-        int pos = Integer.parseInt(e.getComponent().getName());
-        model.move(pos);
-        view.render(model.toString());
-
-        if (model.isWon()) {
-            view.gameWon(model.getWinningPos());
-            Timer t = new Timer(3500, e1 -> {
-                model.reset();
-                view.reset();
-            });
-            t.setRepeats(false);
-            t.start();
-            return;
-        }
-
-        if (model.isFull()) {
-            Timer t = new Timer(3500, e1 -> {
-                model.reset();
-                view.reset();
-            });
-            t.setRepeats(false);
-            t.start();
-            return;
-        }
-
-
-
-
-
+    public void mouseClicked(MouseEvent e) {
+        gameType.execute(e, model, view);
     }
 
 }

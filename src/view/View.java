@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class View { 
+public class View {
     
     private final int ROWS = 3;
     private final int COLS = 3;
@@ -47,14 +47,23 @@ public class View {
     }
 
     public void gameWon(ArrayList<Integer> pos){
-        System.out.println(pos);
         for (int i : pos) {
             buttons[i].setBackground(Color.GREEN);
         }
+    }
+
+    public void gameDraw(ArrayList<Integer> pos){
+        for (int i : pos) {
+            buttons[i].setBackground(Color.RED);
+        }
+    }
+
+    public void setCurrentPlayer(char playeChar){
 
     }
 
     public void render(String board){
+        System.out.println(board);
         for (int i = 0; i < buttons.length; i++) {
             if (board.charAt(i) == '_') continue;
             buttons[i].setFont(new Font("Arial", Font.BOLD, 45));

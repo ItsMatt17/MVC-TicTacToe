@@ -5,6 +5,6 @@ import model.Model;
 import view.View;
 
 public interface Game {
-    public void execute(MouseEvent e, Model model, View view);
+    void execute(MouseEvent e, Model model, View view);
 
 }
