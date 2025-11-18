@@ -29,8 +29,7 @@ public class View {
 
     private void initialize(){ 
         // ===== Game Panel =====
-
-        JPanel board = new JPanel(new GridLayout(ROWS, COLS)); 
+        JPanel board = new JPanel(new GridLayout(ROWS, COLS));
         
         for(int i = 0; i < ROWS * COLS; i++){ 
             JButton button = new JButton();
@@ -42,20 +41,27 @@ public class View {
         frame.add(board);
     }
 
+    public void reset(){
+        for(JButton button : buttons){
+            button.setText("");
+            button.setBackground(null);
+        }
+    }
 
     public void gameWon(ArrayList<Integer> pos){
         System.out.println(pos);
         for (int i : pos) {
             buttons[i].setBackground(Color.GREEN);
         }
+
     }
 
     public void render(String board){
         for (int i = 0; i < buttons.length; i++) {
             if (board.charAt(i) == '_') continue;
+            buttons[i].setFont(new Font("Arial", Font.BOLD, 45));
             buttons[i].setText(String.valueOf(board.charAt(i)));
         }
-
     }
 
     public void setListener(MouseAdapter m){ 

@@ -18,6 +18,14 @@ public class Model {
         this.turn = 0;
     }
 
+    public void reset(){
+        p1 = 0;
+        p2 = 0;
+        turn = 0;
+        winner = "";
+        winningPos.clear();
+    }
+
     public boolean isWon(){
         for (int mask : winBoards) {
             if (((mask & p1) == mask) || (mask & p2) == mask) {
@@ -62,6 +70,7 @@ public class Model {
         if (turn == 1) p2 |= 1 << pos;
         turn ^= 1; // Swap turns
     }
+
     
     @Override
     public String toString(){ 
@@ -77,7 +86,6 @@ public class Model {
             str.append(c);
         }
         return str.toString();
-
     }
     
 
