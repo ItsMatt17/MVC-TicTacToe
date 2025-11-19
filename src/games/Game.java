@@ -12,28 +12,29 @@ public abstract class Game {
 
     public abstract void execute(MouseEvent e, Model model, View view);
 
-    public boolean renderEndstate(Model model, View view) {
-        if (!model.isWon() && !model.isFull()) return false;
-        if (model.isWon()) {
-            model.setWinningPos();
-            view.gameWon(model.getWinningPos());
+    public void renderEndstate(Model model, View view) {
+        assert(model.isFull() || model.isWon());
+        if (model.isWon()) {renderWin(model, view); return;}
+        renderDraw(model, view);
 
-            Utils.sleep(2500, () -> {
-                view.reset();
-                model.reset();
-            });
-            System.out.println("hi");
-            return true;
-        }
+    }
 
+    private void renderWin(Model model, View view){
+        view.gameWon(model.getWinningIndexes());
+
+        Utils.sleep(2500, () -> {
+            view.reset();
+            model.reset();
+        });
+    }
+
+    private void renderDraw(Model model, View view){
         view.gameDraw(new ArrayList<Integer>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8)));
         Utils.sleep(2500, () -> {
             view.reset();
             model.reset();
         });
-        return true;
     }
-
 
 
 }

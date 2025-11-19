@@ -1,5 +1,8 @@
 package view;
 
+import model.GameState;
+import model.PlayerInfo;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
@@ -46,7 +49,7 @@ public class View {
         }
     }
 
-    public void gameWon(ArrayList<Integer> pos){
+    public void gameWon(int[] pos){
         for (int i : pos) {
             buttons[i].setBackground(Color.GREEN);
         }
@@ -58,17 +61,29 @@ public class View {
         }
     }
 
-    public void setCurrentPlayer(char playeChar){
-
+    public void setCurrentPlayer(char playerChar){
     }
 
-    public void render(String board){
-        System.out.println(board);
-        for (int i = 0; i < buttons.length; i++) {
-            if (board.charAt(i) == '_') continue;
-            buttons[i].setFont(new Font("Arial", Font.BOLD, 45));
-            buttons[i].setText(String.valueOf(board.charAt(i)));
+    public void render(GameState state, PlayerInfo[] players){
+        StringBuilder sb = new StringBuilder();
+        String str = state.toString();
+        System.out.println(str);
+        for(int i = 0; i < str.length(); i++) {
+            System.out.println(str.charAt(i));
+            if (str.charAt(i) == '*') {sb.append('*'); continue;}
+            char c = players[Integer.parseInt(String.valueOf(str.charAt(i)))].getMark();
+            System.out.println(c);
+            sb.append(c);
+            }
+
+        str = sb.toString();
+        for(int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '*') continue;
+            buttons[i].setFont(new Font("Arial", Font.PLAIN, 45));
+            buttons[i].setText(String.valueOf(str.charAt(i)));
         }
+
+
     }
 
     public void setListener(MouseAdapter m){ 

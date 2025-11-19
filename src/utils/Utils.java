@@ -11,8 +11,6 @@ public class Utils {
 
     public static boolean testMask(int val, int mask, int expected){ return ((val & mask) == expected); }
 
-    public static int max(int a, int b) {return a > b ? a : b;}
-
     public static void sleep(int millis, Runnable runnable){
         Timer t = new Timer(millis, e1 -> {
           runnable.run();

@@ -1,20 +1,17 @@
 package games;
 
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import model.Model;
-import utils.Utils;
 import view.View;
 
-import javax.swing.*;
 
+public class DefaultGame extends Game {
 
-public class NoAI extends Game {
-
-
-    public NoAI(){}
+    private final boolean ai;
+    public DefaultGame(boolean ai){
+        this.ai = ai;
+    }
 
     
     @Override
@@ -22,10 +19,16 @@ public class NoAI extends Game {
         if(model.isWon() || model.isFull()) return;
 
         int pos = Integer.parseInt(e.getComponent().getName());
-        model.move(pos);
-        view.render(model.toString());
+        if(!model.isOpen(pos)) return;
 
-        renderEndstate(model, view);
+        model.move(pos);
+        view.render(model.getGameState(), model.getPlayers());
+        if(model.isWon()) renderEndstate(model, view);
+
+        if (!ai) return;
+
+
+
 
     }
 

@@ -3,12 +3,9 @@ package controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import games.AI;
 import view.View;
 import games.Game;
 import model.Model;
-
-import javax.swing.*;
 
 public class Controller extends MouseAdapter { 
 
