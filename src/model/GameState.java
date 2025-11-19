@@ -32,7 +32,7 @@ public class GameState {
     }
 
     private int setBit(int board, int pos){
-        return board | (1 << pos);
+        return Utils.setPos(board, pos);
     }
 
     public boolean isTerminal(){
@@ -110,8 +110,6 @@ public class GameState {
             count++;
         }
         return arr;
-
-
     }
 
     public int getWinMask(){

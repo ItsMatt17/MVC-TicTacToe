@@ -18,4 +18,6 @@ public class Utils {
         t.setRepeats(false);
         t.start();
     }
+
+    public static int setPos(int val, int pos){return val | (1 << pos);}
 }

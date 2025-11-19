@@ -13,9 +13,10 @@ public abstract class Game {
     public abstract void execute(MouseEvent e, Model model, View view);
 
     public void renderEndstate(Model model, View view) {
-        assert(model.isFull() || model.isWon());
+        assert(model.isTerminal());
+
         if (model.isWon()) {renderWin(model, view); return;}
-        renderDraw(model, view);
+        if (model.isFull()) {renderDraw(model, view); return;}
 
     }
 

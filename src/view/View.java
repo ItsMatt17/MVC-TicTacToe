@@ -57,7 +57,7 @@ public class View {
 
     public void gameDraw(ArrayList<Integer> pos){
         for (int i : pos) {
-            buttons[i].setBackground(Color.RED);
+            buttons[i].setBackground(Color.YELLOW);
         }
     }
 
