@@ -25,15 +25,14 @@ public class View {
 
         frame.setSize(600, 600);
         frame.add(menu);
+
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private JPanel initializeGamePanel(){
-        // ===== Game Panel =====
         JPanel board = new JPanel(new GridLayout(ROWS, COLS));
-        
         for(int i = 0; i < ROWS * COLS; i++){ 
             JButton button = new JButton();
             button.setName(String.valueOf(i));
