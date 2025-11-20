@@ -9,7 +9,7 @@ public class Model {
 
 
     PlayerInfo[] players = new PlayerInfo[2]; // Easier to deal with turn based moves using this.
-
+    private Repository repository = Repository.getInstance();
     private GameState state = new GameState(0, 0, 0);
 
     public Model(){
@@ -22,6 +22,9 @@ public class Model {
         if(!isWon()) return null;
         return state.getWinningIndexes();
     }
+    public void save(){repository.save();}
+    public void update() {repository.update(this);}
+    public PlayerInfo getWinner(){return players[state.getWinner()];} // TODO: Implement this in a safer way
     public PlayerInfo[] getPlayers(){ return players;}
     public GameState getGameState() {return state;}
     public boolean isTerminal() {return state.isTerminal();}

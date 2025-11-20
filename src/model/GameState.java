@@ -12,7 +12,6 @@ public class GameState {
     private final int turn;
     private final int[] players = new int[2];
 
-
     public GameState(int p1, int p2, int turn){
         this.p1 = p1;
         this.p2 = p2;
@@ -31,6 +30,13 @@ public class GameState {
         return null;
     }
 
+    public int getWinner(){
+        assert(isWon());
+        if (isBoardWin(p1)) return 0;
+        if (isBoardWin(p2)) return 1;
+        return -1;
+    }
+
     private int setBit(int board, int pos){
         return Utils.setPos(board, pos);
     }
@@ -42,6 +48,7 @@ public class GameState {
     public boolean isOpen(int pos){
         return (!Utils.isSet(getBoard(), pos));
     }
+
     public boolean isFull(){ return (getBoard() == 0b111111111); }
 
 
@@ -57,44 +64,6 @@ public class GameState {
         return false;
     }
 
-    public boolean isPlayerWinner(int player){
-        for(int mask : winBoards) {
-            if(Utils.testMask(players[player], mask, mask )) return true;
-        }
-        return false;
-    }
-
-    private int negamax(GameState state, int depth, int maxDepth, int player) {
-        if (state.isPlayerWinner(player)) return 10 - depth;
-        if (state.isPlayerWinner(player ^ 1)) return -10 + depth;
-        if (state.isFull() || depth == maxDepth) return 0;
-
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < 9; i++) {
-            if (!state.isOpen(i)) continue;
-
-            int score = -negamax(move(i), depth + 1, maxDepth, player^1);
-
-            max = Math.max(max, score);
-        }
-        return max;
-    }
-
-    public int getBestMove(){
-        int bestScore = Integer.MIN_VALUE;
-        int bestIndex = -1;
-        for (int i = 0; i < 9; i++) {
-            if(!isOpen(i)) continue;
-
-            int score = -negamax(move(i), 0, 9, 0);
-
-            if (score >  bestScore) {
-                bestScore = score;
-                bestIndex = i;
-            }
-        }
-        return bestIndex;
-    }
 
     public int[] getWinningIndexes(){
         assert(isWon());
@@ -142,6 +111,58 @@ public class GameState {
 
 
 
+    // ========== MINI-MAX HELPER FUNCTIONS ==========
 
+    public static boolean isBoardWin(int board){
+        for (int mask : winBoards) {
+            if ((board & mask) == mask ) return true;
+        }
+        return false;
+    }
+    private static boolean isFull(int board) {return board == 0b111111111;}
+
+    public static boolean isOpen(int board, int pos){
+        return (!Utils.isSet(board, pos));
+    }
+    private static int getBoard(int p1, int p2){ return (p1 | p2);}
+
+    private static int negamax(int currPlayer, int oppPlayer, int depth, int maxDepth) {
+        if(isBoardWin(currPlayer)) return 10 - depth;
+        if(isBoardWin(oppPlayer)) return -10 + depth;
+        if(depth == maxDepth || isFull(currPlayer | oppPlayer)) return 0;
+
+        int max = Integer.MIN_VALUE;
+
+        for(int i = 0; i < 9; i++) {
+            if(!isOpen(currPlayer | oppPlayer, i)) continue;
+
+            int move = Utils.setPos(currPlayer, i);
+            int score = -negamax(oppPlayer, move, depth + 1, maxDepth);
+
+            max = Math.max(score, max);
+        }
+        return max;
+    }
+
+    // NOTE: 0 is MY TURN | 1 IS BOT's TURN
+    public int getBestMove(){
+        int bestScore = Integer.MIN_VALUE;
+        int bestIndex = -1;
+        int curr = players[turn];
+        int nextPlayer = players[turn ^ 1];
+        System.out.println("Turn: " + turn);
+        for (int i = 0; i < 9; i++) {
+            if(!isOpen(getBoard(curr, nextPlayer), i)) continue;
+
+            int move = Utils.setPos(curr, i);
+            int score = -negamax(nextPlayer, move, 0, 9);
+
+            if (score >  bestScore) {
+                bestScore = score;
+                bestIndex = i;
+            }
+        }
+        return bestIndex;
+    }
 
 }

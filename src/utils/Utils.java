@@ -19,5 +19,5 @@ public class Utils {
         t.start();
     }
 
-    public static int setPos(int val, int pos){return val | (1 << pos);}
+    public static int setPos(int val, int pos){return (val | (1 << pos));}
 }

@@ -10,10 +10,7 @@ import java.util.Map;
 
 public class TicTacToe { 
 
-
-
-    public static void main(String[] args){ 
-        int game = Integer.parseInt(args[0]);
+    public static void main(String[] args){
 
         Model m = new Model();
         View v = new View();

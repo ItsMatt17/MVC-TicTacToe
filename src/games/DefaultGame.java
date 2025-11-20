@@ -23,13 +23,14 @@ public class DefaultGame extends Game {
 
         model.move(pos);
         view.render(model.getGameState(), model.getPlayers());
-        if(model.isTerminal()) renderEndstate(model, view);
+        if(model.isTerminal()) processEndstate(model, view);
 
         if (!ai) return;
 
-        pos = model.getBestMove();
-        model.move(pos);
+        int bestPos = model.getBestMove();
+        model.move(bestPos);
         view.render(model.getGameState(), model.getPlayers());
+        if(model.isTerminal()) processEndstate(model, view);
 
     }
     
