@@ -24,7 +24,7 @@ public class View {
         game = initializeGamePanel();
 
         frame.setSize(600, 600);
-        frame.add(menu);
+        frame.add(game);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

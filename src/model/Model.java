@@ -6,8 +6,6 @@ import utils.Utils;
 import java.util.ArrayList;
 
 public class Model {
-
-
     PlayerInfo[] players = new PlayerInfo[2]; // Easier to deal with turn based moves using this.
     private Repository repository = Repository.getInstance();
     private GameState state = new GameState(0, 0, 0);

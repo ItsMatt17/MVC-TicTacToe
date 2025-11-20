@@ -19,6 +19,10 @@ public class Controller extends MouseAdapter {
         this.gameType = gameType;
     }
 
+    public void run(){
+
+    }
+
 
     @Override
     public void mouseReleased(MouseEvent e) {
