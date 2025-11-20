@@ -78,7 +78,7 @@ public class View {
     public void render(GameState state, PlayerInfo[] players){
         StringBuilder sb = new StringBuilder();
         String str = state.toString();
-        System.out.println(str);
+        System.out.println("RENDER: " + str);
         for(int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '*') {sb.append('*'); continue;}
             char c = players[Integer.parseInt(String.valueOf(str.charAt(i)))].getMark();

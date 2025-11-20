@@ -13,10 +13,11 @@ public class Repository {
 
     private static Repository instance = null;
     private HashMap<String, Integer> cache = new HashMap<>(Map.of(
-            "Total", 0,
-            "Draw", 0,
             "X", 0,
-            "O", 0));
+            "O", 0,
+            "Total", 0,
+            "Draw", 0
+    ));
 
     private final String dir = "data.json";
     private Repository(){
@@ -24,8 +25,10 @@ public class Repository {
     }
 
     private void initialize(){
-       instance = this;
+        instance = this;
     }
+
+
 
     public void update(Model model){
         if (!model.isWon()) {

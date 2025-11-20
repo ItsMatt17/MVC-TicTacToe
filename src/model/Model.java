@@ -12,7 +12,7 @@ public class Model {
 
     public Model(){
       players[0] = new PlayerInfo('X', true);
-      players[1] = new PlayerInfo('O', true);
+      players[1] = new PlayerInfo('O', false);
 
     }
 

@@ -14,6 +14,9 @@ public class Utils {
     public static void sleep(int millis, Runnable runnable){
         Timer t = new Timer(millis, e1 -> {
           runnable.run();
+
+          ((Timer)(e1.getSource())).stop();
+
         });
         t.setRepeats(false);
         t.start();

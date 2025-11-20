@@ -19,13 +19,13 @@ public class Controller extends MouseAdapter {
         this.gameType = gameType;
     }
 
-    public void run(boolean replay){
-        gameType.run(model, view, true);
+    public void run(boolean replay){ //TODO: Implement replay in a better way (MENU OR SMTH ELSE)
+        gameType.run(model, view, replay);
     }
 
 
     @Override
-    public void mouseReleased(MouseEvent e) { //TODO: THIS SHOULD NOT BE COUPLED WITH Game type UGH
+    public void mouseReleased(MouseEvent e) { //TODO: THIS SHOULD NOT BE COUPLED WITH Game type UGH (Maybe merge DefaultGame + Game)
         gameType.send(e);
     }
 
