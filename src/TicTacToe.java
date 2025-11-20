@@ -13,6 +13,8 @@ public class TicTacToe {
         View v = new View();
         Controller c = new Controller(v, m, new DefaultGame(true));
         v.setGameListener(c);
+
+        c.run(true);
     
 
     }   

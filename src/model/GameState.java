@@ -143,6 +143,10 @@ public class GameState {
         return max;
     }
 
+    public int getCurrentPlayer(){
+        return turn;
+    }
+
     // NOTE: 0 is MY TURN | 1 IS BOT's TURN
     public int getBestMove(){
         int bestScore = Integer.MIN_VALUE;

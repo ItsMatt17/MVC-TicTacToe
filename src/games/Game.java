@@ -11,6 +11,8 @@ import view.View;
 public abstract class Game {
 
     public abstract void execute(MouseEvent e, Model model, View view);
+    public abstract void send(MouseEvent e);
+    public abstract void run(Model model, View view, boolean replay);
 
     public void processEndstate(Model model, View view) {
         assert(model.isTerminal());
