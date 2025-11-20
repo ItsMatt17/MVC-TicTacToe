@@ -150,7 +150,6 @@ public class GameState {
         int bestIndex = -1;
         int curr = players[turn];
         int nextPlayer = players[turn ^ 1];
-        System.out.println("Turn: " + turn);
         for (int i = 0; i < 9; i++) {
             if(!isOpen(getBoard(curr, nextPlayer), i)) continue;
 

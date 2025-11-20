@@ -21,7 +21,7 @@ public class Controller extends MouseAdapter {
 
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseReleased(MouseEvent e) {
         gameType.execute(e, model, view);
     }
 

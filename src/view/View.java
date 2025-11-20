@@ -6,29 +6,31 @@ import model.PlayerInfo;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class View {
     
     private final int ROWS = 3;
     private final int COLS = 3;
     private final JButton[] buttons = new JButton[ROWS * COLS];
-    private final JFrame frame; 
-
+    private final JFrame frame;
+    private final JPanel game;
+    private final JPanel menu;
 
     public View(){
         this.frame = new JFrame();
-        
-        initialize();
 
-        frame.setSize(600, 700);
+        menu = initializeMenuPanel();
+        game = initializeGamePanel();
+
+        frame.setSize(600, 600);
+        frame.add(menu);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void initialize(){ 
+    private JPanel initializeGamePanel(){
         // ===== Game Panel =====
         JPanel board = new JPanel(new GridLayout(ROWS, COLS));
         
@@ -39,8 +41,18 @@ public class View {
 
             buttons[i] = button;
         }
-        frame.add(board);
+        return board;
     }
+
+    private void removeMenu(){
+        menu.setVisible(false);
+        frame.add(game);
+    }
+
+    private JPanel initializeMenuPanel(){
+       return new Menu();
+    }
+
 
     public void reset(){
         for(JButton button : buttons){
@@ -69,10 +81,8 @@ public class View {
         String str = state.toString();
         System.out.println(str);
         for(int i = 0; i < str.length(); i++) {
-            System.out.println(str.charAt(i));
             if (str.charAt(i) == '*') {sb.append('*'); continue;}
             char c = players[Integer.parseInt(String.valueOf(str.charAt(i)))].getMark();
-            System.out.println(c);
             sb.append(c);
             }
 
@@ -86,7 +96,7 @@ public class View {
 
     }
 
-    public void setListener(MouseAdapter m){ 
+    public void setGameListener(MouseAdapter m){
         for (JButton b : buttons){ 
             b.addMouseListener(m);
         }
